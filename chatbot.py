@@ -21,6 +21,7 @@ def main():
     
     dispatcher.add_handler(CommandHandler("add", add))
     dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(CommandHandler("hello", hello))
     
     # TO start the bot
     updater.start_polling()
@@ -40,6 +41,8 @@ def add(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('You have said ' + msg + 'for ' + redis1.get(msg).decode('UTF-8') + ' times.')
     except (IndexError, ValueError):
         update.message.reply_text('Usage:/ add <keyword>')
+def hello(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Good day, '+ context.args[0] + '!')
 def help_command(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Helping you helping you')
 if __name__ == '__main__':
